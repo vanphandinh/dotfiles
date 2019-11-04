@@ -113,12 +113,12 @@ map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark<space> 
 map <leader>nf :NERDTreeFind<cr>
 " <leader>ba           : list buffers
-" <leader> + bh/bl/bg  : go back/forward/last-used
+" <leader> + h/l/bg    : go back/forward/last-used
 " <leader>bc           : close current buffer
 " <leader>bac          : close all buffers
 nnoremap <leader>ba :ls<cr>
-nnoremap <leader>bh :bp<cr>
-nnoremap <leader>bl :bn<cr>
+nnoremap <leader>h :bp<cr>
+nnoremap <leader>l :bn<cr>
 nnoremap <leader>bg :e#<cr>
 nnoremap <leader>bc :<c-u>bp <bar> bd #<cr>
 nnoremap <leader>bac :<c-u>up <bar> %bd <bar> e#<cr>
