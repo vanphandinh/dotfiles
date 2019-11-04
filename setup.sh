@@ -1,6 +1,6 @@
 ln -s -f ~/dotfiles/zshrc ~/.zshrc
-git clone https://github.com/tmux-plugins/tmux-resurrect
-git clone https://github.com/tmux-plugins/tmux-continuum
+git clone https://github.com/tmux-plugins/tmux-resurrect ~/tmux-resurrect
+git clone https://github.com/tmux-plugins/tmux-continuum ~/tmux-continuum
 brew cask install mpv
 brew cask install xquartz
 brew cask install mps-youtube
