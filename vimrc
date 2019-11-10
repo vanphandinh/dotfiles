@@ -19,8 +19,9 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fugitive'
 Plug 'dracula/vim', { 'as': 'dracula'  }
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
-Plug 'tomlion/vim-solidity'
+Plug 'TovarishFin/vim-solidity'
 Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
@@ -112,7 +113,7 @@ map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark<space> 
 map <leader>nf :NERDTreeFind<cr>
 " <leader>ba           : list buffers
-" <leader> + bh/bl/bg  : go back/forward/last-used
+" <leader> + h/l/bg    : go back/forward/last-used
 " <leader>bc           : close current buffer
 " <leader>bac          : close all buffers
 nnoremap <leader>ba :ls<cr>
@@ -354,3 +355,6 @@ nnoremap <silent> <space>j  :<C-u>CocNext<cr>
 nnoremap <silent> <space>k  :<C-u>CocPrev<cr>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<cr>
+
+" Polyglot
+let g:polyglot_disabled = ['solidity'] " disable solidity syntax 
