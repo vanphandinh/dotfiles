@@ -116,8 +116,8 @@ map <leader>nf :NERDTreeFind<cr>
 " <leader>bc           : close current buffer
 " <leader>bac          : close all buffers
 nnoremap <leader>ba :ls<cr>
-nnoremap <leader>bh :bp<cr>
-nnoremap <leader>bl :bn<cr>
+nnoremap <leader>h :bp<cr>
+nnoremap <leader>l :bn<cr>
 nnoremap <leader>bg :e#<cr>
 nnoremap <leader>bc :<c-u>bp <bar> bd #<cr>
 nnoremap <leader>bac :<c-u>up <bar> %bd <bar> e#<cr>
