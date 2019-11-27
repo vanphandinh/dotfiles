@@ -208,6 +208,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['jshint']
 
 " Rust-vim
 let g:rustfmt_autosave = 1
@@ -227,6 +228,8 @@ let g:fzf_action = {
 let g:tmux_navigator_save_on_switch = 2
 
 " Coc.nvim
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
 " if hidden is not set, TextEdit might fail.
 set hidden
 
