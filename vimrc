@@ -22,6 +22,7 @@ Plug 'TovarishFin/vim-solidity'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'sheerun/vim-polyglot'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'pangloss/vim-javascript'
 
 call plug#end()
 
@@ -365,3 +366,11 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<cr>
 
 " Polyglot
 let g:polyglot_disabled = ['solidity'] " disable solidity syntax 
+
+" Vim-javascript
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_flow = 1
+augroup javascript_folding
+    au!
+    au FileType javascript setlocal foldmethod=syntax
+augroup END
