@@ -8,7 +8,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-syntastic/syntastic'
 Plug 'majutsushi/tagbar'
 Plug 'jiangmiao/auto-pairs'
@@ -22,6 +21,7 @@ Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 Plug 'TovarishFin/vim-solidity'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'sheerun/vim-polyglot'
+Plug 'ludovicchabant/vim-gutentags'
 
 call plug#end()
 
@@ -169,6 +169,8 @@ nmap <leader>p :set paste<cr>:r !pbpaste<cr>:set nopaste<cr>
 imap <leader>p <Esc>:set paste<cr>:r !pbpaste<cr>:set nopaste<cr>
 nmap <leader>y :.w !pbcopy<cr><cr>
 vnoremap <silent> <leader>y :<cr>:let @a=@" \| execute "normal! vgvy" \| let res=system("pbcopy", @") \| let @"=@a<cr>
+" ctags
+map <leader>rt :!ctags --extra=+f -R *<cr><cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                   "
@@ -197,7 +199,8 @@ let g:NERDTreeMapJumpNextSibling=""
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#tagbar#enabled = 0
 let g:airline_powerline_fonts = 1
 
 " Syntastic
