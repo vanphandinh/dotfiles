@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-syntastic/syntastic'
 Plug 'majutsushi/tagbar'
 Plug 'jiangmiao/auto-pairs'
