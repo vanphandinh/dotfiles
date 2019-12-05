@@ -27,19 +27,43 @@ set -e
 #
 # Weather data reference: http://openweathermap.org/weather-conditions
 weather_icon() {
-  case $1 in
-    500) echo 🌦
-      ;;
-    800) echo ☀️
-      ;;
-    801) echo 🌤
-      ;;
-    803) echo ⛅️
-      ;;
-    804) echo ☁️
-      ;;
-    *) echo "$1"
-  esac
+    if [ $1 -ge 200 -a $1 -lt 300 ]; then
+        if [ $1 -eq 210 -o $1 -eq 211 -o $1 -eq 212 -o $1 -eq 221 ]; then
+            echo 🌩️
+        else
+            echo ⛈️
+        fi
+    elif [ $1 -ge 300 -a $1 -lt 400 ]; then
+        echo 🌦️
+    elif [ $1 -ge 500 -a $1 -lt 600 ]; then
+        if [ $1 -eq 511 ]; then
+            echo 🌨️
+        else
+            echo 🌧️
+        fi
+    elif [ $1 -ge 600 -a $1 -lt 700 ]; then
+        echo 🌨️
+    elif [ $1 -ge 700 -a $1 -lt 800 ]; then
+        if [ $1 -eq 762 ]; then
+            echo 🌋
+        elif [ $1 -eq 781 ]; then
+            echo 🌪️
+        else
+            echo 🌫️
+        fi
+    elif [ $1 -ge 800 -a $1 -lt 900 ]; then
+        if [ $1 -eq 800 ]; then
+            echo ☀️
+        elif [ $1 -eq 801 ]; then
+            echo ⛅
+        elif [ $1 -eq 802 ]; then
+            echo 🌥️
+        elif [ $1 -eq 803 -o $1 -eq 804 ]; then
+            echo ☁️
+        else 
+            echo 🌤️
+        fi
+    fi
 }
 
 LOCATION=$(curl --silent https://extreme-ip-lookup.com/json)
