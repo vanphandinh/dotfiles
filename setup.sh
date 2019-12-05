@@ -7,7 +7,6 @@ brew cask install xquartz
 brew cask install mps-youtube
 brew install reattach-to-user-namespace
 brew install ctags
-brew install jq
 ln -s -f ~/dotfiles/tmux.conf ~/.tmux.conf
 rm -rf ~/.vim/
 ln -s -f ~/dotfiles/vimrc ~/.vimrc
