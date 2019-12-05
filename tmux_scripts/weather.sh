@@ -42,10 +42,10 @@ weather_icon() {
   esac
 }
 
-LOCATION=$(curl --silent https://ipinfo.io/json)
+LOCATION=$(curl --silent https://extreme-ip-lookup.com/json)
 CITY=$(echo "$LOCATION" | jq -r .city)
-LAT=$(echo "$LOCATION" | jq -r .loc | cut -d , -f 1)
-LON=$(echo "$LOCATION" | jq -r .loc | cut -d , -f 2)
+LAT=$(echo "$LOCATION" | jq -r .lat)
+LON=$(echo "$LOCATION" | jq -r .lon)
 
 WEATHER=$(curl --silent http://api.openweathermap.org/data/2.5/weather\?lat="$LAT"\&lon="$LON"\&APPID="$API_KEY"\&units=metric)
 
