@@ -215,6 +215,10 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exe='$(npm bin)/eslint'
+let g:syntastic_error_symbol = '✗✗'
+let g:syntastic_style_error_symbol = '✠✠'
+let g:syntastic_warning_symbol = '∆∆'
+let g:syntastic_style_warning_symbol = '≈≈'
 
 " Rust-vim
 let g:rustfmt_autosave = 1
@@ -364,6 +368,8 @@ nnoremap <silent> <space>j  :<C-u>CocNext<cr>
 nnoremap <silent> <space>k  :<C-u>CocPrev<cr>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<cr>
+" Coc-highlight
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Polyglot
 let g:polyglot_disabled = ['solidity'] " disable solidity syntax 
