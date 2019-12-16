@@ -368,8 +368,6 @@ nnoremap <silent> <space>j  :<C-u>CocNext<cr>
 nnoremap <silent> <space>k  :<C-u>CocPrev<cr>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<cr>
-" Coc-highlight
-autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Polyglot
 let g:polyglot_disabled = ['solidity'] " disable solidity syntax 
