@@ -208,6 +208,22 @@ let g:airline_powerline_fonts = 1
 
 " Tagbar
 nmap <leader>tt :TagbarToggle<cr>
+let g:tagbar_type_javascript = {
+      \ 'ctagstype': 'javascript',
+      \ 'kinds': [
+      \ 'A:arrays',
+      \ 'P:properties',
+      \ 'T:tags',
+      \ 'O:objects',
+      \ 'G:generator functions',
+      \ 'F:functions',
+      \ 'C:constructors/classes',
+      \ 'M:methods',
+      \ 'V:variables',
+      \ 'I:imports',
+      \ 'E:exports',
+      \ 'S:styled components'
+      \ ]}
 
 " Ctrlp
 let g:ctrlp_map = '<c-f>'
