@@ -5,11 +5,9 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
 
-Plug 'rust-lang/rust.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-syntastic/syntastic'
 Plug 'majutsushi/tagbar'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
@@ -24,6 +22,8 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'sheerun/vim-polyglot'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'pangloss/vim-javascript'
+Plug 'easymotion/vim-easymotion'
+Plug 'dense-analysis/ale'
 
 call plug#end()
 
@@ -203,25 +203,8 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tagbar#enabled = 0
+let g:airline#extensions#ale#enabled = 1
 let g:airline_powerline_fonts = 1
-
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exe='$(npm bin)/eslint'
-let g:syntastic_error_symbol = '✗✗'
-let g:syntastic_style_error_symbol = '✠✠'
-let g:syntastic_warning_symbol = '∆∆'
-let g:syntastic_style_warning_symbol = '≈≈'
-
-" Rust-vim
-let g:rustfmt_autosave = 1
 
 " Tagbar
 nmap <leader>tt :TagbarToggle<cr>
@@ -379,3 +362,18 @@ augroup javascript_folding
     au!
     au FileType javascript setlocal foldmethod=syntax
 augroup END
+
+" Vim-easymotion
+map z <Plug>(easymotion-prefix)
+
+" Ale
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\   'solidity': ['solc'],
+\}
+let g:ale_sign_error = '✗✗'
+let g:ale_sign_warning = '∆∆'
+nmap <silent> <C-p> <Plug>(ale_previous_wrap)
+nmap <silent> <C-n> <Plug>(ale_next_wrap)
+map <leader>= :ALEFix<cr>
