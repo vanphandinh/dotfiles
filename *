@@ -1,0 +1,12 @@
+" Press ? for help
+
+.. (up a dir)
+/Users/vanphandinh/dotfiles/
+▸  tmux_scripts/
+   ctags
+   Dracula.itermcolors
+   dracula.tmux *
+   setup.sh *
+   tmux.conf
+   vimrc
+   zshrc
