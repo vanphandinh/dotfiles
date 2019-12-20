@@ -17,11 +17,9 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fugitive'
 Plug 'dracula/vim', { 'as': 'dracula'  }
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
-Plug 'TovarishFin/vim-solidity'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'sheerun/vim-polyglot'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'pangloss/vim-javascript'
 Plug 'easymotion/vim-easymotion'
 Plug 'dense-analysis/ale'
 
@@ -34,6 +32,7 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 syntax enable	    	     " enable syntax processing
+set redrawtime=10000         " fix error https://github.com/vim/vim/issues/2790
 set tabstop=4                " number of visual spaces per TAB
 set softtabstop=4            " number of spaces in tab when editing
 set expandtab                " tabs are spaces
@@ -369,11 +368,8 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<cr>
 nnoremap <silent> <space>p  :<C-u>CocListResume<cr>
 
 " Polyglot
-let g:polyglot_disabled = ['solidity'] " disable solidity syntax 
-
-" Vim-javascript
+" Set configs for javascript
 let g:javascript_plugin_jsdoc = 1
-let g:javascript_plugin_flow = 1
 augroup javascript_folding
     au!
     au FileType javascript setlocal foldmethod=syntax
