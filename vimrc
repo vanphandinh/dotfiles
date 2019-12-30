@@ -23,6 +23,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'easymotion/vim-easymotion'
 Plug 'dense-analysis/ale'
 Plug 'tpope/vim-repeat'
+Plug 'mileszs/ack.vim'
 
 call plug#end()
 
@@ -396,3 +397,8 @@ let g:ale_sign_warning = '∆∆'
 nmap <silent> <C-p> <Plug>(ale_previous_wrap)
 nmap <silent> <C-n> <Plug>(ale_next_wrap)
 map <leader>= :ALEFix<cr>
+
+" Ack
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif

@@ -110,3 +110,6 @@ alias oz="openzeppelin"
 alias c="cargo"
 alias x="clear"
 alias tm="tmux"
+
+# export libs
+export PATH="/usr/local/opt/node@10/bin:$PATH"
