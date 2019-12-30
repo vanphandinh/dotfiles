@@ -124,13 +124,13 @@ map <leader>nf :NERDTreeFind<cr>
 " <leader>ba           : list buffers
 " <leader> + h/l/bg    : go back/forward/last-used
 " <leader>bc           : close current buffer
-" <leader>bac          : close all buffers
+" <leader>bac          : close all buffers expect current buffer
 nnoremap <leader>ba :ls<cr>
 nnoremap <leader>h :bp<cr>
 nnoremap <leader>l :bn<cr>
 nnoremap <leader>bg :e#<cr>
-nnoremap <leader>bc :<c-u>bp <bar> bd #<cr>
-nnoremap <leader>bac :<c-u>up <bar> %bd <bar> e#<cr>
+nnoremap <leader>bc :<c-u>bp<bar>bd#<cr>
+nnoremap <leader>bac :<c-u>up<bar>%bd<bar>e#<bar>bd#<cr>
 " smart way to move between windows
 nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
@@ -147,14 +147,15 @@ nnoremap <S-k> <C-W>K
 nnoremap <S-h> <C-W>H
 nnoremap <S-l> <C-W>L 
 " tab mappings
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tl :tabnext<cr>
-map <leader>tm :tabmove
+nnoremap <leader>tn :tabnew<cr>
+nnoremap <leader>to :tabonly<cr>
+nnoremap <leader>tc :tabclose<cr>
+nnoremap <leader>tl :tabnext<cr>
+nnoremap <leader>th :tabprev<cr>
+nnoremap <leader>tm :tabm<space>
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+nnoremap <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 " search and replace the selected text
@@ -238,6 +239,7 @@ let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
+let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git'
 
 " Vim-tmux-navigator 
 " Write all buffers before navigating from Vim to tmux pane
@@ -399,6 +401,16 @@ nmap <silent> <C-n> <Plug>(ale_next_wrap)
 map <leader>= :ALEFix<cr>
 
 " Ack
+nnoremap <space>a :Ack!<space>
+
+" The Silver Searcher
 if executable('ag')
+  " Ack
   let g:ackprg = 'ag --vimgrep'
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
 endif
