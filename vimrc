@@ -234,7 +234,7 @@ let g:tagbar_type_javascript = {
       \ ]}
 
 " Ctrlp
-let g:ctrlp_map = '<c-f>'
+let g:ctrlp_map = '<c-p>'
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-s': 'split',
@@ -387,11 +387,11 @@ augroup END
 
 " Vim-easymotion
 nmap z <Plug>(easymotion-prefix)
-nmap 2s <Plug>(easymotion-s2)
-nmap 2f <Plug>(easymotion-f2)
-nmap 2F <Plug>(easymotion-F2)
-nmap 2t <Plug>(easymotion-t2)
-nmap 2T <Plug>(easymotion-T2)
+nmap s2 <Plug>(easymotion-s2)
+nmap f2 <Plug>(easymotion-f2)
+nmap F2 <Plug>(easymotion-F2)
+nmap t2 <Plug>(easymotion-t2)
+nmap T2 <Plug>(easymotion-T2)
 
 " Ale
 let g:ale_fixers = {
