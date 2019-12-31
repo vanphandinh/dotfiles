@@ -386,7 +386,7 @@ augroup javascript_folding
 augroup END
 
 " Vim-easymotion
-map z <Plug>(easymotion-prefix)
+nmap z <Plug>(easymotion-prefix)
 
 " Ale
 let g:ale_fixers = {
