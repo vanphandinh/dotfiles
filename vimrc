@@ -387,6 +387,11 @@ augroup END
 
 " Vim-easymotion
 nmap z <Plug>(easymotion-prefix)
+nmap 2s <Plug>(easymotion-s2)
+nmap 2f <Plug>(easymotion-f2)
+nmap 2F <Plug>(easymotion-F2)
+nmap 2t <Plug>(easymotion-t2)
+nmap 2T <Plug>(easymotion-T2)
 
 " Ale
 let g:ale_fixers = {
