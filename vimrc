@@ -234,7 +234,6 @@ let g:tagbar_type_javascript = {
       \ ]}
 
 " Ctrlp
-let g:ctrlp_map = '<c-p>'
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-s': 'split',
