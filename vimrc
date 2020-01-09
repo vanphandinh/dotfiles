@@ -15,7 +15,6 @@ Plug 'tpope/vim-commentary'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fugitive'
-Plug 'dracula/vim', { 'as': 'dracula'  }
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'sheerun/vim-polyglot'
@@ -24,6 +23,8 @@ Plug 'easymotion/vim-easymotion'
 Plug 'dense-analysis/ale'
 Plug 'tpope/vim-repeat'
 Plug 'mileszs/ack.vim'
+" Plug 'dracula/vim', { 'as': 'dracula'  }
+Plug 'morhetz/gruvbox'
 
 call plug#end()
 
@@ -77,7 +78,8 @@ if (empty($TMUX))
 endif
 
 set background=dark " for the dark version
-colorscheme dracula
+colorscheme gruvbox
+" colorscheme dracula
 set t_8b=^[[48;2;%lu;%lu;%lum
 set t_8f=^[[38;2;%lu;%lu;%lum]]]]
 " Save whenever switching windows or leaving vim. This is useful when running
@@ -213,6 +215,7 @@ let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tagbar#enabled = 0
 let g:airline#extensions#ale#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:airline_theme = 'base16_gruvbox_dark_hard'
 
 " Tagbar
 nmap <leader>tt :TagbarToggle<cr>
