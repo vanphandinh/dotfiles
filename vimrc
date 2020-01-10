@@ -27,6 +27,7 @@ Plug 'mileszs/ack.vim'
 Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-smooth-scroll'
 
 call plug#end()
 
@@ -423,3 +424,12 @@ if executable('ag')
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
 endif
+
+" Vim-smooth-scroll
+noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 0, 2)<cr>
+noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 0, 2)<cr>
+noremap <silent> <C-b> :call smooth_scroll#up(&scroll*2, 0, 4)<cr>
+noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 0, 4)<cr>
+
+" Vim-gitgutter
+let g:gitgutter_map_keys = 0
