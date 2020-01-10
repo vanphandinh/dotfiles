@@ -25,6 +25,8 @@ Plug 'tpope/vim-repeat'
 Plug 'mileszs/ack.vim'
 " Plug 'dracula/vim', { 'as': 'dracula'  }
 Plug 'morhetz/gruvbox'
+Plug 'airblade/vim-gitgutter'
+Plug 'terryma/vim-multiple-cursors'
 
 call plug#end()
 
