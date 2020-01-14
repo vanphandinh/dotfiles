@@ -406,8 +406,8 @@ let g:ale_fixers = {
 \}
 let g:ale_sign_error = '✗✗'
 let g:ale_sign_warning = '∆∆'
-nmap <silent> <C-p> <Plug>(ale_previous_wrap)
-nmap <silent> <C-n> <Plug>(ale_next_wrap)
+nmap <silent> <space>p <Plug>(ale_previous_wrap)
+nmap <silent> <space>n <Plug>(ale_next_wrap)
 map <leader>= :ALEFix<cr>
 
 " Ack
