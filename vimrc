@@ -206,7 +206,7 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == ""
 " close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeShowHidden=1 " show hidden files and folders
-let NERDTreeIgnore=['.git'] " ignore files and folders
+let NERDTreeIgnore=['.git', 'node_modules'] " ignore files and folders
 let g:NERDTreeMapJumpPrevSibling=""
 let g:NERDTreeMapJumpNextSibling=""
 
