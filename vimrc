@@ -134,16 +134,16 @@ nnoremap <leader>s :mksession<cr>
 map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark<space> 
 map <leader>nf :NERDTreeFind<cr>
-" <leader>ba           : list buffers
+" <leader>bl           : list buffers
 " <leader> + h/l/bg    : go back/forward/last-used
 " <leader>bc           : close current buffer
 " <leader>bac          : close all buffers expect current buffer
-nnoremap <leader>ba :ls<cr>
+nnoremap <leader>bl :ls<cr>
 nnoremap <leader>h :bp<cr>
 nnoremap <leader>l :bn<cr>
 nnoremap <leader>bg :e#<cr>
 nnoremap <leader>bc :<c-u>bp<bar>bd#<cr>
-nnoremap <leader>bac :<c-u>up<bar>%bd<bar>e#<bar>bd#<cr>
+nnoremap <leader>bda :<c-u>up<bar>%bd<bar>e#<bar>bd#<cr>
 " smart way to move between windows
 nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
@@ -384,8 +384,8 @@ let g:ale_fixers = {
 \}
 let g:ale_sign_error = '✗✗'
 let g:ale_sign_warning = '∆∆'
-nmap <silent> <space>p <Plug>(ale_previous_wrap)
-nmap <silent> <space>n <Plug>(ale_next_wrap)
+nmap <silent> <leader>[ <Plug>(ale_previous_wrap)
+nmap <silent> <leader>] <Plug>(ale_next_wrap)
 map <leader>= :ALEFix<cr>
 
 " Ack
