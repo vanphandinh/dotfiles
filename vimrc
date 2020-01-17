@@ -8,18 +8,14 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'majutsushi/tagbar'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fugitive'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 Plug 'ConradIrwin/vim-bracketed-paste'
-" Plug 'sheerun/vim-polyglot'
 Plug 'pangloss/vim-javascript'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'easymotion/vim-easymotion'
 Plug 'dense-analysis/ale'
 Plug 'tpope/vim-repeat'
@@ -30,6 +26,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'Yggdroot/indentLine'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'liuchengxu/vista.vim'
 
 call plug#end()
 
@@ -87,10 +86,10 @@ colorscheme gruvbox
 " colorscheme dracula
 set t_8b=^[[48;2;%lu;%lu;%lum
 set t_8f=^[[38;2;%lu;%lu;%lum]]]]
+
 " Save whenever switching windows or leaving vim. This is useful when running
 " the tests inside vim without having to save all files first.
 au FocusLost,WinLeave * :silent! wa
-
 " Trigger autoread when changing buffers or coming back to vim.
 au FocusGained,BufEnter * :silent! !
 " Return to last edit position when opening files (You want this!)
@@ -193,8 +192,6 @@ nmap <leader>p :set paste<cr>:r !pbpaste<cr>:set nopaste<cr>
 imap <leader>p <Esc>:set paste<cr>:r !pbpaste<cr>:set nopaste<cr>
 nmap <leader>y :.w !pbcopy<cr><cr>
 vnoremap <silent> <leader>y :<cr>:let @a=@" \| execute "normal! vgvy" \| let res=system("pbcopy", @") \| let @"=@a<cr>
-" ctags
-map <leader>rt :!ctags --extra=+f -R *<cr><cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                   "
@@ -224,36 +221,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'default'
-let g:airline#extensions#tagbar#enabled = 0
 let g:airline#extensions#ale#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'base16_gruvbox_dark_hard'
-
-" Tagbar
-nmap <leader>tt :TagbarToggle<cr>
-let g:tagbar_type_javascript = {
-      \ 'ctagstype': 'javascript',
-      \ 'kinds': [
-      \ 'A:arrays',
-      \ 'P:properties',
-      \ 'T:tags',
-      \ 'O:objects',
-      \ 'G:generator functions',
-      \ 'F:functions',
-      \ 'C:constructors/classes',
-      \ 'M:methods',
-      \ 'V:variables',
-      \ 'I:imports',
-      \ 'E:exports',
-      \ 'S:styled components'
-      \ ]}
-
-" Ctrlp
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-s': 'split',
-  \ 'ctrl-v': 'vsplit' }
-let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git'
 
 " Vim-tmux-navigator 
 " Write all buffers before navigating from Vim to tmux pane
@@ -427,10 +397,10 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
   " Use ag over grep
   set grepprg=ag\ --nogroup\ --nocolor
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
+  " " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " " ag is fast enough that CtrlP doesn't need to cache
+  " let g:ctrlp_use_caching = 0
 endif
 
 " Vim-smooth-scroll
@@ -451,8 +421,18 @@ omap ah <Plug>(GitGutterTextObjectOuterPending)
 xmap ih <Plug>(GitGutterTextObjectInnerVisual)
 xmap ah <Plug>(GitGutterTextObjectOuterVisual)
 
-" indentLine
+" IndentLine
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+" Vista.vim
+let g:vista_default_executive = 'coc'
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+nmap <leader>v :Vista!!<cr>
+
+" Fzf
+nnoremap <silent> <c-p> :Files<cr>
+nnoremap <silent> <leader>b :Buffers<cr>
+nnoremap <silent> <leader>rg :Rg<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                   "
