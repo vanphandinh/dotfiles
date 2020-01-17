@@ -391,16 +391,11 @@ map <leader>= :ALEFix<cr>
 " Ack
 nnoremap <space>a :Ack!<space>
 
-" The Silver Searcher
-if executable('ag')
-  " Ack
-  let g:ackprg = 'ag --vimgrep'
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-  " " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  " " ag is fast enough that CtrlP doesn't need to cache
-  " let g:ctrlp_use_caching = 0
+" Ripgrep
+if executable("rg")
+    set grepprg=rg\ --vimgrep\ --no-heading
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+    let g:ackprg = 'rg --vimgrep --no-heading'
 endif
 
 " Vim-smooth-scroll
@@ -431,8 +426,8 @@ nmap <leader>v :Vista!!<cr>
 
 " Fzf
 nnoremap <silent> <c-p> :Files<cr>
+nnoremap <silent> <c-g> :Rg<cr>
 nnoremap <silent> <leader>b :Buffers<cr>
-nnoremap <silent> <leader>rg :Rg<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                   "

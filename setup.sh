@@ -9,7 +9,7 @@ brew cask install mps-youtube
 brew install tmux
 brew install reattach-to-user-namespace
 brew install vim
-brew install the_silver_searcher
+brew install ripgrep
 rm -rf ~/.vim/
 ln -s -f ~/dotfiles/vimrc ~/.vimrc
 ln -s -f ~/dotfiles/tmux.conf ~/.tmux.conf
