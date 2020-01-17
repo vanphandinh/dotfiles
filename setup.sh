@@ -9,6 +9,7 @@ brew cask install mpv
 brew cask install xquartz
 brew cask install mps-youtube
 brew install reattach-to-user-namespace
+brew install vim
 brew install ctags
 brew install the_silver_searcher
 ln -s -f ~/dotfiles/tmux.conf ~/.tmux.conf

@@ -113,3 +113,4 @@ alias tm="tmux"
 
 # export libs
 export PATH="/usr/local/opt/node@10/bin:$PATH"
+export PATH=/usr/local/bin:$PATH
