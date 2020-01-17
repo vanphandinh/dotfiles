@@ -427,7 +427,7 @@ nmap <leader>v :Vista!!<cr>
 " Fzf
 nnoremap <silent> <c-p> :Files<cr>
 nnoremap <silent> <c-g> :Rg<cr>
-nnoremap <silent> <leader>b :Buffers<cr>
+nnoremap <silent> <leader>bb :Buffers<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                   "
