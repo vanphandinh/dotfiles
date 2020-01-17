@@ -17,7 +17,8 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fugitive'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 Plug 'ConradIrwin/vim-bracketed-paste'
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
+Plug 'pangloss/vim-javascript'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'easymotion/vim-easymotion'
 Plug 'dense-analysis/ale'
@@ -28,6 +29,7 @@ Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'terryma/vim-smooth-scroll'
+Plug 'Yggdroot/indentLine'
 
 call plug#end()
 
@@ -355,9 +357,9 @@ xmap af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
-" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-nmap <silent> <C-d> <Plug>(coc-range-select)
-xmap <silent> <C-d> <Plug>(coc-range-select)
+" Use <TAB> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
 
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
@@ -389,8 +391,7 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<cr>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<cr>
 
-" Polyglot
-" Set configs for javascript
+" Vim-javascript
 let g:javascript_plugin_jsdoc = 1
 augroup javascript_folding
     au!
@@ -449,6 +450,9 @@ omap ih <Plug>(GitGutterTextObjectInnerPending)
 omap ah <Plug>(GitGutterTextObjectOuterPending)
 xmap ih <Plug>(GitGutterTextObjectInnerVisual)
 xmap ah <Plug>(GitGutterTextObjectOuterVisual)
+
+" indentLine
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                   "
