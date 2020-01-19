@@ -74,7 +74,7 @@ plugins=(git tmux zsh-autosuggestions zsh-syntax-highlighting brew)
 ZSH_TMUX_AUTOSTART=true
 # zsh-autosuggestions
 bindkey '^ ' autosuggest-accept
-# move cursor to begining/end of line
+# built-in features 
 bindkey '^b' beginning-of-line
 bindkey '^e' end-of-line
 
@@ -114,4 +114,5 @@ alias tm="tmux"
 # export libs
 export PATH="/usr/local/opt/node@10/bin:$PATH"
 export PATH=/usr/local/bin:$PATH
+# fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
