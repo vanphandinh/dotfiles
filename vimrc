@@ -70,6 +70,9 @@ set smarttab                 " enable smart-tab
 set smartcase                " enable smart-case search
 set ignorecase               " always case-insensitive
 set incsearch                " search for string incremantally
+filetype indent on           " enable filetype plugins
+filetype plugin on
+set whichwrap+=<,>,h,l,[,]   " automatically wrap left and right
 
 " use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 if (empty($TMUX))
@@ -142,8 +145,10 @@ nnoremap <leader>bl :ls<cr>
 nnoremap <leader>h :bp<cr>
 nnoremap <leader>l :bn<cr>
 nnoremap <leader>bg :e#<cr>
-nnoremap <leader>bc :<c-u>bp<bar>bd#<cr>
-nnoremap <leader>bda :<c-u>up<bar>%bd<bar>e#<bar>bd#<cr>
+" nnoremap <leader>bc :<c-u>bp<bar>bd#<cr>
+" nnoremap <leader>bda :<c-u>up<bar>%bd<bar>e#<bar>bd#<cr>
+map <leader>bc :Bclose<cr>
+map <leader>bda :call CloseAllBuffersExceptCurrent()<cr>
 " smart way to move between windows
 nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
@@ -369,6 +374,7 @@ augroup javascript_folding
 augroup END
 
 " Vim-easymotion
+"
 map z <Plug>(easymotion-prefix)
 map s2 <Plug>(easymotion-s2)
 map f2 <Plug>(easymotion-f2)
@@ -380,7 +386,7 @@ map T2 <Plug>(easymotion-T2)
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
-\   'solidity': ['solc'],
+  \ 'json': ['prettier']
 \}
 let g:ale_sign_error = '✗✗'
 let g:ale_sign_warning = '∆∆'
@@ -429,6 +435,21 @@ nnoremap <silent> <c-p> :Files<cr>
 nnoremap <silent> <c-g> :Rg<cr>
 nnoremap <silent> <leader>bb :Buffers<cr>
 
+let g:fzf_layout = { 'down': '~30%' }
+
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                   "
 "                           HELP FUNCTIONS                          "
@@ -460,4 +481,41 @@ function! VisualSelection(direction) range
 
     let @/ = l:pattern
     let @" = l:saved_reg
+endfunction
+
+" Don't close window when deleting a buffer
+command! Bclose call <SID>BufcloseCloseIt()
+function! <SID>BufcloseCloseIt()
+  let l:currentBufNum = bufnr("%")
+  let l:alternateBufNum = bufnr("#")
+
+  if buflisted(l:alternateBufNum)
+    buffer #
+  else
+    bnext
+  endif
+
+  if bufnr("%") == l:currentBufNum
+    new
+  endif
+
+  if buflisted(l:currentBufNum)
+    execute("bdelete! ".l:currentBufNum)
+  endif
+endfunction
+
+function! CloseAllBuffersExceptCurrent()
+  let currentBuffer = bufnr("%")
+  let lastBuffer = bufnr("$")
+  let nerdtreeBuffer = bufnr(t:NERDTreeBufName)
+
+  if currentBuffer < nerdtreeBuffer
+    let midBufferBefore = currentBuffer | let midBufferAfter = nerdtreeBuffer
+  else
+    let midBufferBefore = nerdtreeBuffer | let midBufferAfter = currentBuffer
+  end
+
+  if midBufferBefore > 1 | silent! execute "1,".(midBufferBefore-1)."bd" | endif
+  if (midBufferAfter - midBufferBefore) > 2 | silent! execute (midBufferBefore+1).",".(midBufferAfter-1)."bd" | endif
+  if midBufferAfter < lastBuffer | silent! execute (midBufferAfter+1).",".lastBuffer."bd" | endif
 endfunction
