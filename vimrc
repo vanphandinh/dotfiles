@@ -197,6 +197,13 @@ nmap <leader>p :set paste<cr>:r !pbpaste<cr>:set nopaste<cr>
 imap <leader>p <Esc>:set paste<cr>:r !pbpaste<cr>:set nopaste<cr>
 nmap <leader>y :.w !pbcopy<cr><cr>
 vnoremap <silent> <leader>y :<cr>:let @a=@" \| execute "normal! vgvy" \| let res=system("pbcopy", @") \| let @"=@a<cr>
+" Move a line of text using <leader>+[up/down] on mac
+nnoremap <leader><Down> :m .+1<cr>==
+nnoremap <leader><Up> :m .-2<cr>==
+inoremap <leader><Down> <Esc>:m .+1<cr>==gi
+inoremap <leader><Up> <Esc>:m .-2<cr>==gi
+vnoremap <leader><Down> :m '>+1<cr>gv=gv
+vnoremap <leader><Up> :m '<-2<cr>gv=gv
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                                                   "
