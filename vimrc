@@ -50,6 +50,7 @@ set cursorline               " highlight current line
 set wildmenu                 " visual autocomplete for command menu
 set lazyredraw               " redraw only when we need to.
 set showmatch                " highlight matching [{()}]
+set mat=2                    " how many tenths of a second to blink when matching brackets
 set incsearch                " search as characters are entered
 set hlsearch                 " highlight matches
 set foldenable               " enable folding
@@ -61,6 +62,7 @@ set splitright               " split right
 set encoding=UTF-8
 set number relativenumber    " turn hybrid line numbers on
 set autoread                 " Set to auto read when a file is changed from the outside
+au FocusGained,BufEnter * checktime
 set noswapfile
 set backspace=indent,eol,start    " Allow backspace in insert mode
 set autoindent               " auto-indent new line
@@ -73,6 +75,10 @@ set incsearch                " search for string incremantally
 filetype indent on           " enable filetype plugins
 filetype plugin on
 set whichwrap+=<,>,h,l,[,]   " automatically wrap left and right
+set so=7                     " set 7 lines to the cursor - when moving vertically using j/k
+set history=500              " sets how many lines of history VIM has to remember
+set ruler                    " always show current position
+set magic                    " for regular expressions turn magic on
 
 " use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 if (empty($TMUX))
@@ -176,16 +182,18 @@ nnoremap <leader>tm :tabm<space>
 nnoremap <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
-" search and replace the selected text
-vnoremap <silent> <leader>r :call VisualSelection('replace')<cr>
+" When you press gv you Ack after the selected text
+vnoremap <silent> gv :call VisualSelection('gv', '')<cr>
+" When you press <leader>r you can search and replace the selected text
+vnoremap <silent> <leader>r :call VisualSelection('replace', '')<cr>
 " open windows
 nnoremap <leader>ws :sp<cr>
 nnoremap <leader>wv :vsp<cr>
 " fast saving of a buffer
 nmap <leader>w :w!<cr>
 " searches for the current selection
-vnoremap <silent> * :call VisualSelection('f')<cr>
-vnoremap <silent> # :call VisualSelection('b')<cr>
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<cr>/<C-r>=@/<cr><cr>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<cr>?<C-r>=@/<cr><cr>
 " insert current date time
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
 " quickly open a buffer for scripbble
@@ -464,26 +472,20 @@ command! -bang -nargs=* Rg
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! CmdLine(str)
-    exe "menu Foo.Bar :" . a:str
-    emenu Foo.Bar
-    unmenu Foo
-endfunction
+    call feedkeys(":" . a:str)
+endfunction 
 
-function! VisualSelection(direction) range
+function! VisualSelection(direction, extra_filter) range
     let l:saved_reg = @"
     execute "normal! vgvy"
 
-    let l:pattern = escape(@", '\\/.*$^~[]')
+    let l:pattern = escape(@", "\\/.*'$^~[]")
     let l:pattern = substitute(l:pattern, "\n$", "", "")
 
-    if a:direction == 'b'
-        execute "normal ?" . l:pattern . "^M"
-    elseif a:direction == 'gv'
-        call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
+    if a:direction == 'gv'
+        call CmdLine("Ack '" . l:pattern . "' " )
     elseif a:direction == 'replace'
         call CmdLine("%s" . '/'. l:pattern . '/')
-    elseif a:direction == 'f'
-        execute "normal /" . l:pattern . "^M"
     endif
 
     let @/ = l:pattern
@@ -526,3 +528,16 @@ function! CloseAllBuffersExceptCurrent()
   if (midBufferAfter - midBufferBefore) > 2 | silent! execute (midBufferBefore+1).",".(midBufferAfter-1)."bd" | endif
   if midBufferAfter < lastBuffer | silent! execute (midBufferAfter+1).",".lastBuffer."bd" | endif
 endfunction
+
+" Delete trailing white space on save, useful for some filetypes ;)
+fun! CleanExtraSpaces()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    silent! %s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfun
+
+if has("autocmd")
+    autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
+endif
