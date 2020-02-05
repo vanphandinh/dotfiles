@@ -22,7 +22,7 @@ Plug 'tpope/vim-repeat'
 Plug 'mileszs/ack.vim'
 " Plug 'dracula/vim', { 'as': 'dracula'  }
 Plug 'morhetz/gruvbox'
-Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'Yggdroot/indentLine'
@@ -425,17 +425,20 @@ noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 0, 2)<cr>
 noremap <silent> <C-b> :call smooth_scroll#up(&scroll*2, 0, 4)<cr>
 noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 0, 4)<cr>
 
-" Vim-gitgutter
-let g:gitgutter_map_keys = 0
-nmap ]h <Plug>(GitGutterNextHunk)
-nmap [h <Plug>(GitGutterPrevHunk)
-nmap ghs <Plug>(GitGutterStageHunk)
-nmap ghu <Plug>(GitGutterUndoHunk)
-nmap ghp <Plug>(GitGutterPreviewHunk)
-omap ih <Plug>(GitGutterTextObjectInnerPending)
-omap ah <Plug>(GitGutterTextObjectOuterPending)
-xmap ih <Plug>(GitGutterTextObjectInnerVisual)
-xmap ah <Plug>(GitGutterTextObjectOuterVisual)
+" Vim-signify
+nnoremap <leader>gd :SignifyDiff<cr>
+nnoremap <leader>gp :SignifyHunkDiff<cr>
+nnoremap <leader>gu :SignifyHunkUndo<cr>
+
+" hunk jumping
+nmap <leader>gj <plug>(signify-next-hunk)
+nmap <leader>gk <plug>(signify-prev-hunk)
+
+" hunk text object
+omap ic <plug>(signify-motion-inner-pending)
+xmap ic <plug>(signify-motion-inner-visual)
+omap ac <plug>(signify-motion-outer-pending)
+xmap ac <plug>(signify-motion-outer-visual)
 
 " IndentLine
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
