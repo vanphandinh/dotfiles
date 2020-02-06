@@ -446,7 +446,7 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 " Vista.vim
 let g:vista_default_executive = 'coc'
 let g:vista_fzf_preview = ['right:50%']
-nmap <leader>v :Vista!!<cr>
+nmap <leader>vv :Vista!!<cr>
 
 " Fzf
 nnoremap <silent> <c-p> :Files<cr>
