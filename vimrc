@@ -235,7 +235,7 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == ""
 " close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeShowHidden=1 " show hidden files and folders
-let NERDTreeIgnore=['.git', 'node_modules'] " ignore files and folders
+let NERDTreeIgnore=['.git', 'node_modules', '.DS_Store'] " ignore files and folders
 let g:NERDTreeMapJumpPrevSibling=""
 let g:NERDTreeMapJumpNextSibling=""
 
@@ -278,13 +278,21 @@ set signcolumn=yes
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" coc-snippets
-let g:coc_snippet_next = '<tab>'
+" Use <Right> for select text for visual placeholder of snippet.
+vmap <Right> <Plug>(coc-snippets-select)
+
+" Use <Right> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<right>'
+
+" Use <Left> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<left>'
+
+" Use <Right> for both expand and jump (make expand higher priority.)
+imap <Right> <Plug>(coc-snippets-expand-jump)
 
 function! s:check_back_space() abort
   let col = col('.') - 1
