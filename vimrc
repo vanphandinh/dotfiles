@@ -17,7 +17,7 @@ Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'pangloss/vim-javascript'
 Plug 'easymotion/vim-easymotion'
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 Plug 'tpope/vim-repeat'
 Plug 'mileszs/ack.vim'
 " Plug 'dracula/vim', { 'as': 'dracula'  }
@@ -413,16 +413,16 @@ map t2 <Plug>(easymotion-t2)
 map T2 <Plug>(easymotion-T2)
 
 " Ale
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint'],
-  \ 'json': ['prettier']
-\}
-let g:ale_sign_error = '✗✗'
-let g:ale_sign_warning = '∆∆'
-nmap <silent> <leader>[ <Plug>(ale_previous_wrap)
-nmap <silent> <leader>] <Plug>(ale_next_wrap)
-map <leader>= :ALEFix<cr>
+" let g:ale_fixers = {
+" \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+" \   'javascript': ['eslint'],
+"   \ 'json': ['prettier']
+" \}
+" let g:ale_sign_error = '✗✗'
+" let g:ale_sign_warning = '∆∆'
+" nmap <silent> <leader>[ <Plug>(ale_previous_wrap)
+" nmap <silent> <leader>] <Plug>(ale_next_wrap)
+" map <leader>= :ALEFix<cr>
 
 " Ack
 nnoremap <space>a :Ack!<space>

@@ -112,7 +112,6 @@ alias x="clear"
 alias tm="tmux"
 
 # export libs
-export PATH="/usr/local/opt/node@10/bin:$PATH"
 export PATH=/usr/local/bin:$PATH
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -120,3 +119,4 @@ export PATH=/usr/local/bin:$PATH
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git}"'
 # To apply the command to CTRL-T as well
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+fpath+=${ZDOTDIR:-~}/.zsh_functions
